@@ -43,4 +43,3 @@ class HomePage(BasePage):
         home_button = self.driver.find_element(By.XPATH, '//a[@data-rb-event-key="#/login"]')
         home_button.click()
         time.sleep(3)
-
