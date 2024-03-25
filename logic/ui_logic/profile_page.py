@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from infra.ui_infra.base_page import BasePage
 import time
 
+
 class ProfilePage(BasePage):
     PROFILE_BUTTON = (By.XPATH, '//a[@href="#/profile"]')
     UPDATE_NAME_INPUT = (By.ID, 'name')
