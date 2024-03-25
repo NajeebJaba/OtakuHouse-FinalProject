@@ -1,25 +1,38 @@
 import unittest
-from infra.api_infra.api_browser_wrapper import APIBrowserWrapper
-from logic.api_logic.api_profile_page import APIProfilePage
+from logic.api_logic.api_profile_page import ProfilePage
 
-class TestAPIProfilePage(unittest.TestCase):
+"""Before start testing , I want to tell that the profile form didn't change any 
+                    value ,and the update button didn't work and get error 500, but actually if I updating
+                     the username for example, it's appear in homePage with the new username updating, same thing for password
+                      and email, when user do login actions he will see the updating"""
+
+
+class TestProfilePage(unittest.TestCase):
+
     def setUp(self):
-        self.api_browser_wrapper = APIBrowserWrapper()
-        self.profile_page = APIProfilePage(self.api_browser_wrapper)
+        self.UserProfile = ProfilePage()
+        self.response = None
+        self.data = None
 
-    def test_update_profile(self):
-        user_id = 24
-        profile_data = {
-            "name_for_profile": "najeeeeeb",
-            "email_for_profile": "jabanaj33@gmail.com",
-            "password_for_profile": "112233",
-            "confirm_password_for_profile": "112233"
-        }
-        headers = {
-            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzOTEzMzgyLCJqdGkiOiIyNDIzNzg5Y2E2NWE0ODVlYTJhNGI0MWUxN2UwOWI5NSIsInVzZXJfaWQiOjh9.HBTVOkFtSK9wsAKcGbEl-YeRMCswsouwlb9aQusbBlY"
-        }
-        response = self.profile_page.update_profile(user_id, profile_data, headers)
-        self.assertTrue(response.status_code, 200)
+    """When entering to profile page , in the form there is email to change"""
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_change_the_profile_form_email_for_user(self):
+        self.response = self.UserProfile.profile_page_refresh(self.UserProfile.user_id, self.UserProfile.Username,
+                                                              self.UserProfile.email_for_reg, self.UserProfile.UserPassword)
+        self.assertEqual(self.response.status_code, 200)
+
+    """When entering to profile page , in the form there is password and confirm password to change"""
+
+    # confirm password should be match with password,otherwise the form will not change
+    def test_change_profile_form_password_for_user(self):
+        self.response = self.UserProfile.profile_page_refresh(self.UserProfile.user_id, self.UserProfile.Username,
+                                                              self.UserProfile.UserEmail, self.UserProfile.updating_password)
+        self.assertEqual(self.response.status_code, 200)
+
+    """When entering to profile page , in the form there is name for user that display in HomePage"""
+
+    # Also here I can change the name for the user
+    def test_change_profile_form_name_user(self):
+        self.response = self.UserProfile.profile_page_refresh(self.UserProfile.user_id, self.UserProfile.change_name,
+                                                              self.UserProfile.UserEmail, self.UserProfile.UserPassword)
+        self.assertEqual(self.response.status_code, 200)
