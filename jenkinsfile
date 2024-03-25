@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    environment {
+        //API_KEY= '46e29623-4a45-46d5-83ca-8acc2be72534'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Prepare') {
+            steps {
+                echo 'setting up Python environment.......'
+                sh 'python3 -m venv venv'
+                sh '. venv/bin/activate'
+                sh 'pip install requests'
+
+
+        stage('Test') {
+            steps {
+                echo 'run tests for OtakuHouse ..'
+                sh """
+                . venv/bin/activate
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying..'
+            }
+        }
+    }
+}
