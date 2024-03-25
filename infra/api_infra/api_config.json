@@ -1,0 +1,41 @@
+{
+  "url": "http://127.0.0.1:8000/",
+  "email": "jabnaj33@gmail.com",
+  "password": "123456",
+  "wrong_email": "wrongemail@gmail.com",
+  "wrong_password": "wrongpassword",
+  "search_product": "DRAGON BALL SUPER - SON GOKU & VEGETA FIGURE",
+  "search_product_didnt_exist": "aaaaaaaaaa",
+  "auth_token_order_place": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzOTEzMzgyLCJqdGkiOiIyNDIzNzg5Y2E2NWE0ODVlYTJhNGI0MWUxN2UwOWI5NSIsInVzZXJfaWQiOjh9.HBTVOkFtSK9wsAKcGbEl-YeRMCswsouwlb9aQusbBlY",
+  "order_place": {
+    "orderItems": [
+      {
+        "product": "5f3f5f9f3e4f9a0138a57d19",
+        "name": "DRAGON BALL SUPER - SON GOKU & VEGETA FIGURE",
+        "image": "/images/goku_veg_figure.jpg",
+        "price": "3599.00",
+        "qty": 1
+      }
+    ],
+    "shippingAddress": {
+      "address": "123 Anime Street",
+      "city": "Tokyo",
+      "postalCode": "1001",
+      "country": "Japan"
+    },
+    "paymentMethod": "PayPal",
+    "itemsPrice": "3599.00",
+    "shippingPrice": "100.00",
+    "taxPrice": "359.90",
+    "totalPrice": "4058.90"
+  },
+  "profile_update": {
+    "name": "najeeeeeb",
+    "email": "jabnaj33@gmail.com",
+    "password": "112233",
+    "confirmPassword": "112233"
+  }
+}
+
+
+
