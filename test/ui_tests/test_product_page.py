@@ -6,6 +6,7 @@ from logic.ui_logic.product_page import ProductPage
 from infra.ui_infra.config_handler import ConfigHandler
 import time
 
+"""FOR REVIEW"""
 class TestProductPage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

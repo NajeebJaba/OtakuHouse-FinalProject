@@ -1,10 +1,10 @@
 import unittest
-from logic.api_logic.api_login_page import LoginPage
+from logic.api_logic.api_login_page import LoginAPI
 
 
 class TestAPILoginPage(unittest.TestCase):
     def setUp(self):
-        self.login_page = LoginPage()
+        self.login_page = LoginAPI()
         self.email = "jabnaj33@gmail.com"
         self.password = "123456"
         self.invalid_email = "wrongemail@gmail.com"

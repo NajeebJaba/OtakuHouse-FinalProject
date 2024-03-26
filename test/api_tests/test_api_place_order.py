@@ -1,13 +1,13 @@
 import unittest
 from infra.api_infra.api_browser_wrapper import APIBrowserWrapper
 from logic.api_logic.api_place_order import APIOrderPage
-from infra.api_infra.api_config_handler import APIHandler
+from infra.api_infra.api_config_handler import APIConfigHandler
 
 
 class TestAPIOrderPage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.api_config = APIHandler().read_config_data()
+        #cls.api_config = APIHandler().read_config_data()
         cls.api_browser_wrapper = APIBrowserWrapper()
         cls.order_page = APIOrderPage(cls.api_browser_wrapper)
 
