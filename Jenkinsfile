@@ -7,6 +7,8 @@ pipeline {
         PYTHON_PATH = "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
         // Define the directory where the HTML report is generated
         HTML_REPORT_DIR = "reports"
+        // Define the path to the test_runner.py within the test layer directory
+        TEST_RUNNER_PATH = "test\\test_runner.py"
     }
     stages {
         stage('Preparation') {
@@ -38,8 +40,8 @@ pipeline {
                     bat """
                     call ${VENV_DIR}\\Scripts\\activate
                     set PYTHONPATH=%PYTHONPATH%;${WORKSPACE}
-                    // Run the tests and generate the HTML report
-                    ${VENV_DIR}\\Scripts\\python -m pytest ${WORKSPACE}\\tests\\tests_api\\updateProfile_testAPI.py --html=${WORKSPACE}\\${HTML_REPORT_DIR}\\arcane_report.html
+                    // Run the tests using the test runner script
+                    ${VENV_DIR}\\Scripts\\python ${WORKSPACE}\\${TEST_RUNNER_PATH}
                     """
                 }
             }
