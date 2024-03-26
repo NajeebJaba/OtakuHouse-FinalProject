@@ -57,12 +57,13 @@ pipeline {
             }
         }
         stage('Verify Report') {
-            steps {
-                script {
-                    bat "type ${WORKSPACE}\\${HTML_REPORT_DIR}\\report.html"
-                }
-            }
+    steps {
+        script {
+            // Ensure you're referencing the correct file name here
+            bat "type ${WORKSPACE}\\reports\\arcane_report.html"
         }
+    }
+}
         stage('Archive Reports') {
             steps {
                 archiveArtifacts artifacts: "${HTML_REPORT_DIR}\\*", allowEmptyArchive: true
