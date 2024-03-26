@@ -2,25 +2,24 @@ import unittest
 from logic.api_logic.api_login_page import LoginAPI
 
 
-class TestAPILoginPage(unittest.TestCase):
+class TestLoginAPI(unittest.TestCase):
+
     def setUp(self):
-        self.login_page = LoginAPI()
-        self.email = "jabnaj33@gmail.com"
-        self.password = "123456"
-        self.invalid_email = "wrongemail@gmail.com"
-        self.invalid_password = "wrongpassword"
+        self.login_api = LoginAPI()
 
-    def test_login_with_valid_credentials(self):
-        response = self.login_page.login_page(self.email, self.password)
-        self.assertEqual(response, 200)
+    def test_login_successful(self):
+        response = self.login_api.login_with_credentials(self.login_api.UserEmail, self.login_api.UserPassword)
 
-    def test_login_with_invalid_credentials(self):
-        response = self.login_page.login_page(self.invalid_email, self.invalid_password)
-        # Since it's an invalid login, we expect a status other than 200
-        self.assertNotEqual(response, 200)
+        self.assertEqual(response.status_code, 200)
+        print("Test for successful login passed.")
+
+    def test_login_unsuccessful(self):
+        response = self.login_api.login_with_credentials("incorrect_email@example.com", "wrongpassword")
+
+        self.assertNotEqual(response.status_code, 200)
+        print("Test for unsuccessful login passed.")
+
 
 
 if __name__ == '__main__':
-        unittest.main()
-
-
+    unittest.main()
