@@ -83,7 +83,8 @@
 #     run_api_tests(test_name)
 #     run_ui_tests(test_name)
 
-
+import sys
+sys.path.append('C:/Users/ASUS/OneDrive/מסמכים/GitHub/OtakuHouse-FinalProject')
 import unittest
 
 """to run all the tests i need to take the imports"""

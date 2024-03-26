@@ -8,6 +8,7 @@ from logic.api_logic.api_profile_page import ProfilePage
 
 
 class TestProfilePage(unittest.TestCase):
+    # api profile tests
 
     def setUp(self):
         self.UserProfile = ProfilePage()
@@ -24,6 +25,7 @@ class TestProfilePage(unittest.TestCase):
     """When entering to profile page , in the form there is password and confirm password to change"""
 
     # confirm password should be match with password,otherwise the form will not change
+    #update password test
     def test_change_profile_form_password_for_user(self):
         self.response = self.UserProfile.profile_page_refresh(self.UserProfile.user_id, self.UserProfile.Username,
                                                               self.UserProfile.UserEmail, self.UserProfile.updating_password)
