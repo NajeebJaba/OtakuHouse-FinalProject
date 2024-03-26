@@ -1,3 +1,5 @@
+import sys
+sys.path.append('C:/Users/ASUS/OneDrive/מסמכים/GitHub/OtakuHouse-FinalProject')
 import unittest
 from logic.api_logic.api_login_page import LoginAPI
 from logic.api_logic.api_review_product import ReviewProduct
