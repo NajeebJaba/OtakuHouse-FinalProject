@@ -16,6 +16,8 @@ class APIBrowserWrapper(APIWrapper):
         full_url = f"{self.url.rstrip('/')}/{endpoint.lstrip('/')}"
         return self.request.get(full_url, headers=headers)
 
+
+    #i used put for profile , it's return PUT when fill the form
     def put(self, endpoint, json_data, headers=None):
         headers = headers or {'Content-Type': 'application/json'}
         full_url = f"{self.url.strip('/')}/{endpoint.lstrip('/')}"

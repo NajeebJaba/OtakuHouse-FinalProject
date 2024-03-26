@@ -16,6 +16,15 @@ class APIWrapper:
         self.search_product_by_name = self.config['search_product_by_name'].lower()
         self.product_id = self.config['product_id']
 
+        self.rate = self.config['rating_product']
+        self.review_comment = self.config['review_comment']
+        self.order_id_or = self.config['orderID']
+        self.user_id = self.config['userId']
+        self.request = requests
+        self.change_name = self.config['new_username']
+        self.email_for_reg = self.config['email_for_register_and_update_use_email']
+        self.updating_password = self.config['update_password']
+
         """I called it from json"""
         # self.token = self.config['tokens']['defaultToken']['value']
         # self.headers = self.config['tokens']['defaultToken']['headers']
@@ -37,14 +46,7 @@ class APIWrapper:
             "Authorization": f"Bearer {self.updateProfileToken}"
         }
 
-        self.rate = self.config['rating_product']
-        self.review_comment = self.config['review_comment']
-        self.order_id_or = self.config['orderID']
-        self.user_id = self.config['userId']
-        self.request = requests
-        self.change_name = self.config['new_username']
-        self.email_for_reg = self.config['email_for_register_and_update_use_email']
-        self.updating_password = self.config['update_password']
+
 
     def api_get_request(self, url):
         self.response = self.request.get(url)
