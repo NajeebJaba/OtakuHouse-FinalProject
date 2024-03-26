@@ -24,7 +24,8 @@ class TestProfilePage(unittest.TestCase):
         self.home_page.click_on_sign_in_link()
         time.sleep(2)
 
-        # Enter username and password then click signin
+        """login page"""
+        # enter username and password then click signin
         self.login_page.enter_username(self.config["email"])
         self.login_page.enter_password_and_login(self.config["password"])
         time.sleep(3)
