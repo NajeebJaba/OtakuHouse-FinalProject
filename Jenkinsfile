@@ -1,112 +1,73 @@
-// pipeline {
-//     agent any
-//
-//     environment {
-//         //API_KEY= '46e29623-4a45-46d5-83ca-8acc2be72534'
-//     }
-//
-//     stages {
-//         stage('Checkout') {
-//             steps {
-//                 checkout scm
-//             }
-//         }
-//         stage('Prepare') {
-//             steps {
-//                 echo 'setting up Python environment.......'
-//                 sh 'python3 -m venv venv'
-//                 sh '. venv/bin/activate'
-//                 sh 'pip install requests'
-//
-//
-//         stage('Test') {
-//             steps {
-//                 echo 'run tests for OtakuHouse ..'
-//                 sh """
-//                 . venv/bin/activate
-//             }
-//         }
-//         stage('Deploy') {
-//             steps {
-//                 echo 'Deploying..'
-//             }
-//         }
-//     }
-// }
-
-
-
-
 pipeline {
     agent any
     environment {
-        // Python virtual environment directory for isolated dependencies
-        VENV_DIR = 'venv_magic'
-        // The lair of your project's heart
-        PROJECT_ROOT = "C:\Users\ASUS\OneDrive\מסמכים\GitHub\OtakuHouse-FinalProject" //"C:\\Users\\ASUS\\OneDrive\\Documents\\GitHub\\OtakuHouse-FinalProject"
-        // The path to the almighty Python
+        // Define the Python virtual environment directory
+        VENV_DIR = 'venv'
+        // Define the project's root directory
+        PROJECT_ROOT = "C:\\Users\\ASUS\\OneDrive\\מסמכים\\GitHub\\OtakuHouse-FinalProject"
+        // Define the path to the Python executable
         PYTHON_PATH = "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
-        // Where the tales of tests are told
-        TALES_DIR = "tales_of_testing"
+        // Define the directory where the HTML report is generated
+        HTML_REPORT_DIR = "reports"
     }
     stages {
-        stage('Gathering Scrolls') {
+        stage('Preparation') {
             steps {
-                echo 'Engaging SCM to gather the latest scrolls...'
+                echo 'Checking out SCM'
                 checkout scm
             }
         }
-        stage('Concocting Potions') {
+        stage('Setup Python Environment') {
             steps {
                 script {
                     bat "cd ${PROJECT_ROOT}"
-                    bat "if not exist ${VENV_DIR} call \"%PYTHON_PATH%\" -m venv ${VENV_DIR}"
+                    bat "if not exist ${VENV_DIR} ${PYTHON_PATH} -m venv ${VENV_DIR}"
                     bat "call ${VENV_DIR}\\Scripts\\activate"
                     bat "call ${VENV_DIR}\\Scripts\\python.exe -m pip install --upgrade pip"
-                    bat "call ${VENV_DIR}\\Scripts\\pip install -r potions.txt"
+                    bat "call ${VENV_DIR}\\Scripts\\pip install -r requirements.txt"
                 }
             }
         }
-        stage('Chanting Spells') {
+        stage('Run Tests') {
             steps {
                 script {
                     bat """
                     call ${VENV_DIR}\\Scripts\\activate
                     set PYTHONPATH=%PYTHONPATH%;${PROJECT_ROOT}
-                    ${VENV_DIR}\\Scripts\\python -m pytest ${PROJECT_ROOT}\\tests\\wizardry_tests\\profile_enchantment_test.py --html=${PROJECT_ROOT}\\${TALES_DIR}\\arcane_report.html
+                    ${VENV_DIR}\\Scripts\\python -m pytest ${PROJECT_ROOT}\\tests\\tests_api\\updateProfile_testAPI.py --html=${PROJECT_ROOT}\\${HTML_REPORT_DIR}\\arcane_report.html
                     """
                 }
             }
         }
-        stage('Cataloging Tomes') {
+        stage('List Report') {
             steps {
                 script {
-                    bat "dir ${PROJECT_ROOT}\\${TALES_DIR}"
+                    bat "dir ${PROJECT_ROOT}\\${HTML_REPORT_DIR}"
                 }
             }
         }
-        stage('Showcasing Arcane Knowledge') {
+        stage('Publish Report') {
             steps {
                 publishHTML target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: "${PROJECT_ROOT}\\${TALES_DIR}",
+                    reportDir: "${PROJECT_ROOT}\\${HTML_REPORT_DIR}",
                     reportFiles: 'arcane_report.html',
-                    reportName: "Arcane Testing Chronicles"
+                    reportName: "HTML Report"
                 ]
             }
         }
-        stage('Deciphering Ancient Texts') {
+        stage('Verify Report') {
             steps {
                 script {
-                    bat "type ${PROJECT_ROOT}\\${TALES_DIR}\\arcane_report.html"
+                    bat "type ${PROJECT_ROOT}\\${HTML_REPORT_DIR}\\arcane_report.html"
                 }
             }
         }
-        stage('Ensuring Legacy') {
+        stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: "${TALES_DIR}\\*", allowEmptyArchive: false
+                archiveArtifacts artifacts: "${HTML_REPORT_DIR}\\*", allowEmptyArchive: true
             }
         }
     }
