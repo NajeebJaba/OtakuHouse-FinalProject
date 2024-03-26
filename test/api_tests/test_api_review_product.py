@@ -19,7 +19,7 @@ class TestReviewProduct(unittest.TestCase):
     def test_review_product_in_page(self):
         print("\nStarting test for adding a product review...")
         self.response = self.review_product_in_page.add_product(self.review_product_in_page.rate, self.review_product_in_page.review_comment, self.review_product_in_page.product_id)
-        # Check if a review was already added, expect a 400 error
+        # check if a review was already added, expect a 400 error
         if 'Product already reviewed' in self.response.json().get('detail', ''):
             self.assertEqual(self.response.status_code, 400, "Expected failure when adding duplicate review")
         else:
