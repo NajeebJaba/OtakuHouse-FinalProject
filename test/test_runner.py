@@ -1,5 +1,3 @@
-
-
 import sys
 sys.path.append('C:/Users/ASUS/OneDrive/מסמכים/GitHub/OtakuHouse-FinalProject')
 import unittest
