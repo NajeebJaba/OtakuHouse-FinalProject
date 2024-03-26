@@ -32,6 +32,8 @@ class TestProductPageToSeeReview(unittest.TestCase):
         self.home_page.navigate_to(self.config["url"])
         time.sleep(2)
 
+
+        """move to logic"""
         # search for a product
         search_input = self.driver.find_element(By.XPATH, "//input[@name='q']")
         search_input.send_keys(self.config["search_product"])
