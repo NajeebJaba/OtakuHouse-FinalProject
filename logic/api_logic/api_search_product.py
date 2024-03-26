@@ -1,11 +1,9 @@
-from infra.api_infra.api_browser_wrapper import APIBrowserWrapper
+from infra.api_infra.api_wrapper import APIWrapper
 
-class SearchProduct:
-    def __init__(self, product_name):
-        self.browser_wrapper = APIBrowserWrapper()
-        self.product_name = product_name
+class SearchProduct(APIWrapper):
+    def __init__(self):
+        super().__init__()
 
-    def search(self):
-        endpoint = f"api/products/?q={self.product_name}"
-        response = self.browser_wrapper.get(endpoint)
-        return response
+    def search_product_in_home_page(self, keyword):
+        print(f"Searching for product with keyword: {keyword}")
+        return self.api_get_request(f'{self.url[:-2]}api/products/?keyword={keyword}')
