@@ -3,8 +3,6 @@ pipeline {
     environment {
         // Define the Python virtual environment directory
         VENV_DIR = 'venv'
-        // Define the project's root directory
-        PROJECT_ROOT = "C:\\Users\\ASUS\\OneDrive\\מסמכים\\GitHub\\OtakuHouse-FinalProject"
         // Define the path to the Python executable
         PYTHON_PATH = "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
         // Define the directory where the HTML report is generated
@@ -20,21 +18,28 @@ pipeline {
         stage('Setup Python Environment') {
             steps {
                 script {
-                    bat "cd ${PROJECT_ROOT}"
+                    // Navigate to the project root directory in the workspace
+                    bat "cd ${WORKSPACE}"
+                    // Create the virtual environment if it doesn't exist
                     bat "if not exist ${VENV_DIR} ${PYTHON_PATH} -m venv ${VENV_DIR}"
+                    // Activate the virtual environment
                     bat "call ${VENV_DIR}\\Scripts\\activate"
+                    // Upgrade pip
                     bat "call ${VENV_DIR}\\Scripts\\python.exe -m pip install --upgrade pip"
-                    bat "call ${VENV_DIR}\\Scripts\\pip install -r requirements.txt"
+                    // Install dependencies from requirements.txt
+                    bat "call ${VENV_DIR}\\Scripts\\pip install -r ${WORKSPACE}\\requirements.txt"
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
+                    // Activate the virtual environment and set the Python path
                     bat """
                     call ${VENV_DIR}\\Scripts\\activate
-                    set PYTHONPATH=%PYTHONPATH%;${PROJECT_ROOT}
-                    ${VENV_DIR}\\Scripts\\python -m pytest ${PROJECT_ROOT}\\tests\\tests_api\\updateProfile_testAPI.py --html=${PROJECT_ROOT}\\${HTML_REPORT_DIR}\\arcane_report.html
+                    set PYTHONPATH=%PYTHONPATH%;${WORKSPACE}
+                    // Run the tests and generate the HTML report
+                    ${VENV_DIR}\\Scripts\\python -m pytest ${WORKSPACE}\\tests\\tests_api\\updateProfile_testAPI.py --html=${WORKSPACE}\\${HTML_REPORT_DIR}\\arcane_report.html
                     """
                 }
             }
@@ -42,17 +47,19 @@ pipeline {
         stage('List Report') {
             steps {
                 script {
-                    bat "dir ${PROJECT_ROOT}\\${HTML_REPORT_DIR}"
+                    // List the content of the HTML report directory
+                    bat "dir ${WORKSPACE}\\${HTML_REPORT_DIR}"
                 }
             }
         }
         stage('Publish Report') {
             steps {
+                // Publish the HTML report
                 publishHTML target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: "${PROJECT_ROOT}\\${HTML_REPORT_DIR}",
+                    reportDir: "${WORKSPACE}\\${HTML_REPORT_DIR}",
                     reportFiles: 'arcane_report.html',
                     reportName: "HTML Report"
                 ]
@@ -61,12 +68,14 @@ pipeline {
         stage('Verify Report') {
             steps {
                 script {
-                    bat "type ${PROJECT_ROOT}\\${HTML_REPORT_DIR}\\arcane_report.html"
+                    // Display the HTML report content
+                    bat "type ${WORKSPACE}\\${HTML_REPORT_DIR}\\arcane_report.html"
                 }
             }
         }
         stage('Archive Reports') {
             steps {
+                // Archive the HTML report files
                 archiveArtifacts artifacts: "${HTML_REPORT_DIR}\\*", allowEmptyArchive: true
             }
         }
