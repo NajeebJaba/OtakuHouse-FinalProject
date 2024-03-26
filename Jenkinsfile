@@ -68,5 +68,14 @@ pipeline {
                 archiveArtifacts artifacts: "${HTML_REPORT_DIR}\\*", allowEmptyArchive: true
             }
         }
+        stage('Install Dependencies') {
+    steps {
+        script {
+            // Assuming you have activated the virtual environment if you are using one
+            sh 'pip install -r requirements.txt'
+        }
+    }
+}
+
     }
 }
