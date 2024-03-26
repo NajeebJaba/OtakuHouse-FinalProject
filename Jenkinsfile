@@ -59,7 +59,6 @@ pipeline {
         stage('Verify Report') {
     steps {
         script {
-            // Ensure you're referencing the correct file name here
             bat "type ${WORKSPACE}\\reports\\arcane_report.html"
         }
     }
@@ -71,4 +70,3 @@ pipeline {
         }
     }
 }
-/////
