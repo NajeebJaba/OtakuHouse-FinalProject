@@ -8,7 +8,8 @@ class SearchPage(BasePage):
     SEARCH_BUTTON = (By.XPATH, "//button[contains(text(),'Search')]")
     # GO_BACK_LINK = (By.XPATH, "//a[contains(text(),'Go Back')]")
     LOGO = (By.XPATH, "//img[@alt='Otaku Shop']")
-    PRODUCT_IMAGE_XPATH = "//img[@class='card-img' and contains(@src, '/media/images/ichigo_shirt.jpg')]"
+    PRODUCT_IMAGE_XPATH =  "//img[@class='card-img' and contains(@src, '/media/images/ichigo_shirt.jpg')]"
+    # PRODUCT_IMAGE_XPATH = "//img[@src='/media/images/mikasajacket.jpg' and @alt='Attack On Titan - Mikasa Battle Long Sleeve']"
 
     def search_for_product(self, product_name):
         search_input = self.driver.find_element(*self.SEARCH_INPUT)
