@@ -166,6 +166,10 @@
 // }
 
 
+
+
+
+
 pipeline {
     agent any
     environment {
@@ -199,7 +203,7 @@ pipeline {
                     bat """
                     call ${VENV_DIR}\\Scripts\\activate
                     set PYTHONPATH=%PYTHONPATH%;${WORKSPACE}
-                    ${VENV_DIR}\\Scripts\\python ${TEST_RUNNER} --html=${WORKSPACE}\\${HTML_REPORT_DIR}\\arcane_report.html
+                    ${VENV_DIR}\\Scripts\\python -m pytest ${TEST_RUNNER} --html=${WORKSPACE}\\${HTML_REPORT_DIR}\\arcane_report.html
                     """
                 }
             }
