@@ -56,4 +56,3 @@ class ProductPage(BasePage):
         self.driver.execute_script("arguments[0].scrollIntoView(true);", go_back_link)
         self.driver.execute_script("arguments[0].click();", go_back_link)
         time.sleep(3)
-
