@@ -3,7 +3,7 @@
 
 Otaku House is an e-commerce platform dedicated to fans of anime. Here, you can find a variety of products to show your love for your favorite series and characters.
 
-![Anime Character](An_enthusiastic_anime_character_with_spiky_black_h.png)
+![Anime Character](image.jpeg)
 
 ## Project Overview
 
