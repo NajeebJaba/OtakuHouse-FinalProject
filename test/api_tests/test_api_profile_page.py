@@ -33,7 +33,7 @@ class TestProfilePage(unittest.TestCase):
 
     """When entering to profile page , in the form there is name for user that display in HomePage"""
 
-    # Also here I can change the name for the user
+    # also here I can change the name for the user
     def test_change_profile_form_name_user(self):
         self.response = self.UserProfile.profile_page_refresh(self.UserProfile.user_id, self.UserProfile.change_name,
                                                               self.UserProfile.UserEmail, self.UserProfile.UserPassword)

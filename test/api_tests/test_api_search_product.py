@@ -4,11 +4,10 @@ from logic.api_logic.api_search_product import SearchProduct
 class TestSearchProduct(unittest.TestCase):
     def setUp(self):
         self.search_api = SearchProduct()
-        # assuming 'search_product_for_test' is correctly configured in your API's config JSON
         self.search_data = {
             'search_prod_one': "Dragon Ball Super - Son Goku & Vegeta Figure",
-            # 'search_prod_two': "aaaaaa",
-            'search_prod_three': "Dragon Ball Super - Son Goku & Vegeta Figureaaaaaa"
+            # 'search_prod_two': "aaaaaaaaaaa",
+            'search_prod_three': "Dragon Ball Super - Son Goku & Vegeta Figureaaaaaaaaaaa"
         }
 
     def test_successful_search(self):
@@ -17,11 +16,6 @@ class TestSearchProduct(unittest.TestCase):
         self.assertNotEqual(len(response.json()), 0, "The response JSON should not be empty for a successful search.")
         print("Test for successful search passed.")
 
-    # def test_successful_search_empty_result(self):
-    #     response = self.search_api.search_product_in_home_page(self.search_data['search_prod_two'])
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertEqual(len(response.json()), 0, "The response JSON should be empty for an unsuccessful search with empty result.")
-    #     print("Test for unsuccessful search with empty result passed.")
 
     def test_unsuccessful_search_but_show_result(self):
         response = self.search_api.search_product_in_home_page(self.search_data['search_prod_three'])

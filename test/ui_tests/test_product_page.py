@@ -29,7 +29,7 @@ class TestProductPage(unittest.TestCase):
         time.sleep(3)
 
     def test_interact_with_products(self):
-        # interact with the first product
+        #interact with the first product
         self.home_page.click_product_1()
         self.product_page.update_quantity(2)
         self.product_page.select_review_rate("5")
@@ -49,8 +49,6 @@ class TestProductPage(unittest.TestCase):
         time.sleep(3)
         self.product_page.go_back()
 
-        """need product 3 """
-
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
@@ -58,3 +56,10 @@ class TestProductPage(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+
+
+
+
+
